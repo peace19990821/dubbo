@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.wts.dao.ArticleMapper">
+	  	<select id="selects" resultType="Map">
+	  	 select * from cms_article a left join cms_user b on a.user_id = b.id 
+	  	 <where>
+	  	 	<if test="start != null and start != ''">
+	  	 		and a.created >= #{start}
+	  	 	</if>
+	  	 	<if test="end != null and end != ''">
+	  	 		and a.created &lt;= #{end}
+	  	 	</if>
+	  	 </where>
+	  	 	 <if test="dtj != ''">
+	  	 		ORDER BY a.created DESC
+	  		 </if>
+	  </select>
+  </mapper>
